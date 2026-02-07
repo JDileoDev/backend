@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import List , Optional
 
-class LibrosMostrar(BaseModel):
+class MostrarResponse(BaseModel):
     id : int
     nombre : str
     categoria : str

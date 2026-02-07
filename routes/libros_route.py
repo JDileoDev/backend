@@ -1,15 +1,22 @@
 
 from fastapi import HTTPException , status , APIRouter
-from typing import List 
+from typing import List , Optional
 import service.libros_service as service 
 import schemas.libros_schema as schema
 router = APIRouter()
 
 
-@router.get("/libros" , response_model=List[schema.LibrosMostrar])
-def mostrar_libros():
+@router.get("/libros" , response_model=List[schema.MostrarResponse])
+def mostrar_libros(categoria:Optional[str] = None , stock: Optional[bool]= None):
     libros = service.obtener_libros()
-    if not libros:
+    
+    if categoria:
+        libros = service.filtrado_por_categoria(categoria , stock)
+    
+    if stock is True or stock is False:
+        libros = service.filtrar_por_stock(stock)
+
+    if not service.obtener_libros():
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
     return libros
 
@@ -22,7 +29,7 @@ def crear_libro(libro : schema.LibroCargar ):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND , detail="No se cargó un libro")
     return libro_nuevo
 
-@router.put("/productos/{id}")
+@router.put("/libros/{id}")
 def actualizar_producto(id: int , datos :schema.LibroActualizar):
     libro_actualizado = service.act_libro(id, datos)
 
@@ -39,11 +46,3 @@ def delete_libro(id : int ):
         raise HTTPException(status_code=404 , detail=f"Libro no encontrado, ID:{id} no se encuentra en la lista.")
     
     return libro_eliminado
-
-@router.get("/libros/filtrar_categoria" , response_model=List[schema.LibroCategoria])
-def filtro_por_categoria(libros_categoria : str):
-    libros_categoria = service.filtrado_por_categoria(libros_categoria)
-
-    if not libros_categoria:
-        raise HTTPException(status_code=404 , detail=f"No se encontraron Libros en la categoria: {libros_categoria}")
-    return libros_categoria
