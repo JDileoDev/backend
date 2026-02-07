@@ -1,5 +1,7 @@
 
 import repositories.libros_repository as repository
+
+
 def obtener_libros():
     lista_libros = repository.obtener_libros_r()
     if not lista_libros:
@@ -13,12 +15,11 @@ def cargar_libro(libro : dict):
     return nuevo_libro
 
 def aumentar_id():
-    id = 1
-    lista_libros = repository.obtener_libros_r()
-    for l in lista_libros:
-        if l.get("id") == id :
-            id +=1
-    return id
+    libros = repository.obtener_libros_r()
+    if not libros:
+        return 1
+        
+    return max(l['id'] for l in libros) +1
 
 
 
@@ -42,8 +43,6 @@ def borrar_libro(id):
     return libro_eliminado
 
 def filtrado_por_categoria(cat):
-    categoria = repository.filtrar_por_cat(cat)
+    libros = repository.obtener_libros_r()
 
-    if not categoria:
-        return None
-    return categoria
+    return [l for l in libros if l.get("categoria" , "").lower() == cat.lower()]

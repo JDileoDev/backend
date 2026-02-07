@@ -18,7 +18,3 @@ def eliminar_libro(id):
             libros.remove(l)
             return True
     return False
-
-def filtrar_por_cat(cat : str ):
-
-    return [l for l in libros if l.get("categoria" , "").lower() == cat.lower()]
