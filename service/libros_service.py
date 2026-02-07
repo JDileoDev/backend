@@ -42,21 +42,12 @@ def borrar_libro(id):
     
     return libro_eliminado
 
-def filtrado_por_categoria(cat : str, opcion :bool):
-    if opcion == None:
-        libros = repository.obtener_libros_r()
-        return [l for l in libros if l.get("categoria" , "").lower() == cat.lower()]
-    else:
-            libros = repository.obtener_libros_r()
-            if opcion is True:
-                return [l for l in libros if l.get("stock",0) > 0 and l.get("categoria" , "").lower() == cat.lower()]
-            else:
-                return [l for l in libros if l.get("stock",0) == 0 and l.get("categoria" , "").lower() == cat.lower()]
-        
+def filtrado_por_categoria(cat : str, lista_libros):
+    return [l for l in lista_libros if l.get("categoria" , "").lower() == cat.lower()]
 
-def filtrar_por_stock(opcion: bool):
-    libros = repository.obtener_libros_r()
+
+def filtrar_por_stock(opcion: bool , lista_libros):
     if opcion is True:
-        return [l for l in libros if l.get("stock",0) > 0]
+        return [l for l in lista_libros if l.get("stock",0) > 0]
     else:
-        return [l for l in libros if l.get("stock",0) == 0]
+        return [l for l in lista_libros if l.get("stock",0) == 0]

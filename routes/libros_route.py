@@ -11,10 +11,10 @@ def mostrar_libros(categoria:Optional[str] = None , stock: Optional[bool]= None)
     libros = service.obtener_libros()
     
     if categoria:
-        libros = service.filtrado_por_categoria(categoria , stock)
+        libros = service.filtrado_por_categoria(categoria , libros)
     
     if stock is True or stock is False:
-        libros = service.filtrar_por_stock(stock)
+        libros = service.filtrar_por_stock(stock , libros)
 
     if not service.obtener_libros():
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
