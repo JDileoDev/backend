@@ -2,11 +2,11 @@
 import repositories.libros_repository as repository
 
 
-def obtener_libros():
+def obtener_libros(limite , offset):
     lista_libros = repository.obtener_libros_r()
     if not lista_libros:
         return None
-    return lista_libros 
+    return lista_libros[offset: offset + limite] 
 
 def cargar_libro(libro : dict):
     nuevo_libro = repository.cargar_libro_r(libro)
@@ -47,6 +47,8 @@ def filtrado_por_categoria(cat : str, lista_libros):
 
 
 def filtrar_por_stock(opcion: bool , lista_libros):
+    if not lista_libros:
+        return None
     if opcion is True:
         return [l for l in lista_libros if l.get("stock",0) > 0]
     else:
