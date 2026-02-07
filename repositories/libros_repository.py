@@ -1,5 +1,5 @@
 libros = []
-categoria = []
+
 
 def obtener_libros_r():
     return libros
@@ -20,7 +20,5 @@ def eliminar_libro(id):
     return False
 
 def filtrar_por_cat(cat : str ):
-    for l in libros:
-        if l.get("categoria",0) == cat:
-            categoria.append(l)
-    return categoria
+
+    return [l for l in libros if l.get("categoria" , "").lower() == cat.lower()]

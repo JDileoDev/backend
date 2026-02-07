@@ -36,14 +36,14 @@ def delete_libro(id : int ):
     libro_eliminado = service.borrar_libro(id)
 
     if not libro_eliminado:
-        raise HTTPException(status_code=404 , detail="Libro no encontrado")
+        raise HTTPException(status_code=404 , detail=f"Libro no encontrado, ID:{id} no se encuentra en la lista.")
     
     return libro_eliminado
 
 @router.get("/libros/filtrar_categoria" , response_model=List[schema.LibroCategoria])
-def filtro_por_categoria(categoria : str):
-    categoria = service.filtrado_por_categoria(categoria)
+def filtro_por_categoria(libros_categoria : str):
+    libros_categoria = service.filtrado_por_categoria(libros_categoria)
 
-    if not categoria:
-        raise HTTPException(status_code=404 , detail="CAtegoria no encontrada")
-    return categoria
+    if not libros_categoria:
+        raise HTTPException(status_code=404 , detail=f"No se encontraron Libros en la categoria: {libros_categoria}")
+    return libros_categoria
