@@ -9,10 +9,15 @@ router = APIRouter()
 @router.get("/libros" , response_model=List[schema.MostrarResponse])
 def mostrar_libros(categoria:Optional[str] = None , stock: Optional[bool]= None):
     libros = service.obtener_libros()
-    if not libros:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+    
     if categoria:
-        libros = service.filtrado_por_categoria(categoria)
+        libros = service.filtrado_por_categoria(categoria , stock)
+    
+    if stock is True or stock is False:
+        libros = service.filtrar_por_stock(stock)
+
+    if not service.obtener_libros():
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
     return libros
 
 @router.post("/libros/cargar" )
