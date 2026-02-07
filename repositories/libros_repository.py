@@ -21,6 +21,6 @@ def eliminar_libro(id):
 
 def filtrar_por_cat(cat : str ):
     for l in libros:
-        if l.get("categoria") == cat:
+        if l.get("categoria",0) == cat:
             categoria.append(l)
     return categoria

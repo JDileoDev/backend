@@ -46,3 +46,4 @@ def filtro_por_categoria(categoria : str):
 
     if not categoria:
         raise HTTPException(status_code=404 , detail="CAtegoria no encontrada")
+    return categoria
