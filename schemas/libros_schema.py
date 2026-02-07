@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import List , Optional
 
-class MostrarResponse(BaseModel):
+class LibroSalida(BaseModel):
     id : int
     nombre : str
     categoria : str
@@ -24,3 +24,7 @@ class LibroCategoria(BaseModel):
     id: int
     nombre: str
     stock : Optional[int] = None
+
+class LibroFiltro(BaseModel):
+    categoria : Optional[str] = None
+    stock: Optional[bool] = None
