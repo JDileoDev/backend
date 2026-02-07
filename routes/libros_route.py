@@ -9,7 +9,6 @@ router = APIRouter()
 @router.get("/libros" , response_model=List[schema.MostrarResponse])
 def mostrar_libros(categoria:Optional[str] = None , stock: Optional[bool]= None):
     libros = service.obtener_libros()
-    
     if categoria:
         libros = service.filtrado_por_categoria(categoria , libros)
     
