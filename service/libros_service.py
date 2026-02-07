@@ -40,3 +40,10 @@ def borrar_libro(id):
         return None
     
     return libro_eliminado
+
+def filtrado_por_categoria(cat):
+    categoria = repository.filtrar_por_cat(cat)
+
+    if not categoria:
+        return None
+    return categoria

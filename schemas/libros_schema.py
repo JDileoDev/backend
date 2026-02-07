@@ -19,3 +19,8 @@ class LibroActualizar(BaseModel):
     nombre: Optional[str] = None
     categoria: Optional[str]= None
     stock: Optional[int] = None
+
+class LibroCategoria(BaseModel):
+    id: int
+    nombre: str
+    stock : Optional[int] = None

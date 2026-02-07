@@ -39,3 +39,10 @@ def delete_libro(id : int ):
         raise HTTPException(status_code=404 , detail="Libro no encontrado")
     
     return libro_eliminado
+
+@router.get("/libros/filtrar_categoria" , response_model=List[schema.LibroCategoria])
+def filtro_por_categoria(categoria : str):
+    categoria = service.filtrado_por_categoria(categoria)
+
+    if not categoria:
+        raise HTTPException(status_code=404 , detail="CAtegoria no encontrada")
