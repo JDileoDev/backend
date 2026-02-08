@@ -2,10 +2,10 @@ from pydantic import BaseModel
 from typing import List , Optional
 
 class LibroSalida(BaseModel):
-    id : int
+    id : int    
     nombre : str
     categoria : str
-    stock : Optional[int] = None
+    stock : int
 
 class LibroCargar(BaseModel):
     nombre : str

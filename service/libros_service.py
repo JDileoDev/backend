@@ -62,3 +62,11 @@ def filtrar_por_stock(opcion: bool , lista_libros):
         return [l for l in lista_libros if l.get("stock",0) > 0]
     else:
         return [l for l in lista_libros if l.get("stock",0) == 0]
+    
+
+def mostrar_libros_join():
+    libros_categoria = repository.obtener_libros_con_categoria()
+
+    if not libros_categoria:
+        return None
+    return libros_categoria
