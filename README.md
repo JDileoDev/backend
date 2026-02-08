@@ -1,33 +1,53 @@
-# API de Gestión de Libros - Entrenamiento Backend
+# 📚 Sistema de Gestión de Libros - API en Migración
 
-Este proyecto es una **API REST** desarrollada con **FastAPI** como parte de mi proceso de formación técnica. El objetivo principal fue implementar un CRUD completo siguiendo una **arquitectura en capas**, separando las responsabilidades de rutas, lógica de negocio y persistencia de datos.
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
+![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
 
-## 🚀 Características
-* **CRUD Completo**: Funcionalidades para obtener, crear, actualizar y eliminar libros.
-* **Validación de Datos**: Uso de **Pydantic** para asegurar la integridad de los datos de entrada y salida.
-* **Arquitectura Profesional**: Separación clara de responsabilidades para facilitar el mantenimiento y la escalabilidad.
-* **Manejo de Errores**: Implementación de códigos de estado HTTP (404, 200, etc.) para respuestas claras al cliente.
+Este proyecto forma parte de mi formación como desarrollador **Junior/Trainee**. Mi objetivo es construir una API robusta, evolucionando desde un almacenamiento volátil hacia una arquitectura profesional con persistencia real.
 
-## 🛠️ Estructura del Proyecto
-El código está organizado de la siguiente manera:
+## 🎯 Objetivos y Aprendizajes
+En este proceso de desarrollo estoy aplicando y consolidando los siguientes conceptos:
+* **Arquitectura por Capas:** Separación de responsabilidades en `routes`, `services`, `schemas` y `db`.
+* **Persistencia SQL:** Migración de datos desde listas en memoria y archivos JSON hacia **SQLite3**.
+* **Validación de Datos:** Uso de **Pydantic** para garantizar la integridad de la información y el tipado fuerte.
+* **Lógica de Negocio:** Implementación de filtrado, ordenamiento con funciones Lambda y "Joins" manuales entre entidades.
 
-* **`main.py`**: Punto de entrada de la aplicación y configuración del router.
-* **`routes/`**: Definición de endpoints y manejo de peticiones HTTP.
-* **`service/`**: Capa de lógica de negocio, incluyendo reglas de aplicación y generación de IDs.
-* **`schemas/`**: Modelos de datos y validaciones con Pydantic.
-* **`repositories/`**: Simulación de persistencia de datos mediante almacenamiento en memoria volátil.
+## 🛠️ Estado de la API (Migración Híbrida)
+Actualmente, el proyecto se encuentra en una etapa de transición:
 
-## 💻 Tecnologías Utilizadas
-* **Python 3.x**
-* **FastAPI**
-* **Pydantic**
-* **Uvicorn** (Servidor ASGI)
+| Método | Ruta | Estado | Almacenamiento |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/libros` | ✅ Finalizado | **SQLite** |
+| `POST` | `/libros` | ✅ Finalizado | **SQLite** |
+| `PUT` | `/libros/{id}` | ⚠️ Legacy | Memoria (Volátil) |
+| `DELETE` | `/libros/{id}` | ⚠️ Legacy | Memoria (Volátil) |
 
-## 🔧 Próximos Pasos (Roadmap)
-Este proyecto es una base sólida que planeo expandir con:
-1. Implementación de una base de datos real (SQLAlchemy + SQLite/PostgreSQL).
-2. Desarrollo de una interfaz web simple con **Bootstrap**.
-3. Implementación de autenticación de usuarios.
+## 📁 Estructura del Proyecto
+- **`routes/`**: Controladores de las rutas y manejo de peticiones HTTP.
+- **`services/`**: Lógica de negocio (procesamiento de datos y consultas SQL).
+- **`schemas/`**: Modelos de Pydantic para validación de entrada y salida.
+- **`db/`**: Configuración y gestión de la base de datos local.
 
----
-*Desarrollado como parte del proceso de formación técnica en el ecosistema de Python.*
+## 🚀 Cómo ejecutar el proyecto
+1. Clonar el repositorio:
+   ```bash
+   git clone [https://github.com/JDileoDev/backend.git](https://github.com/JDileoDev/backend.git)
+Instalar dependencias:
+
+Bash
+
+pip install fastapi uvicorn
+Iniciar el servidor:
+
+Bash
+
+uvicorn main:app --reload
+🚩 Próximos Desafíos
+[ ] Migrar los métodos PUT y DELETE a persistencia SQL.
+
+[ ] Implementar tabla de Categorías con relaciones (Foreign Keys).
+
+[ ] Refactorizar el código legacy para unificar la arquitectura.
+
+Proyecto en constante desarrollo. Enfocado en la aplicación de buenas prácticas de Backend.
