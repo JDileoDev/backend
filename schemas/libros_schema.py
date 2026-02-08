@@ -28,3 +28,7 @@ class LibroCategoria(BaseModel):
 class LibroFiltro(BaseModel):
     categoria : Optional[str] = None
     stock: Optional[bool] = None
+
+class LibroListaResponse(BaseModel):
+    total: int
+    data : List[LibroSalida]

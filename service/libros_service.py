@@ -2,19 +2,11 @@
 import repositories.libros_repository as repository
 
 
-<<<<<<< HEAD
-def obtener_libros(limite , offset):
-    lista_libros = repository.obtener_libros_r()
-    if not lista_libros:
-        return None
-    return lista_libros[offset: offset + limite] 
-=======
 def obtener_libros(limite , offset ,orden =None):
     lista_libros = repository.obtener_libros_r()
     if not lista_libros:
         return None
     lista_libros = lista_libros[offset: offset + limite] 
->>>>>>> desarrollo
 
     if orden:
         reverse = False
