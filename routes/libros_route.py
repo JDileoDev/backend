@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 from fastapi import Query ,HTTPException , status , APIRouter , Depends
+=======
+from fastapi import HTTPException , status , APIRouter , Depends
+>>>>>>> 7b67465b20be0c5c09adc804797b50c359b6af5b
 from typing import List , Optional 
 import service.libros_service as service 
 import schemas.libros_schema as schema
@@ -7,12 +11,23 @@ router = APIRouter()
 
 
 @router.get("/libros" , response_model=List[schema.LibroSalida])
+<<<<<<< HEAD
 def mostrar_libros(
         filtros : schema.LibroFiltro = Depends(),
         limite : int =  Query(10, ge=1),
         offset : int = Query(0, ge=0), 
         orden : str | None = None    ):
     
+=======
+def mostrar_libros(filtros : schema.LibroFiltro = Depends()):
+    libros = service.obtener_libros()
+    
+    if filtros.categoria:
+        libros = service.filtrado_por_categoria(filtros.categoria , libros)
+    
+    if filtros.stock is True or filtros.stock is False:
+        libros = service.filtrar_por_stock(filtros.stock , libros)
+>>>>>>> 7b67465b20be0c5c09adc804797b50c359b6af5b
 
     libros = service.obtener_libros(limite, offset,orden)
     
