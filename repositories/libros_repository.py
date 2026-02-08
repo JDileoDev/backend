@@ -1,4 +1,4 @@
-
+from database import obtener_conexion
 categorias = [
     {"id": 1, "nombre": "programacion"},
     {"id": 2, "nombre": "bases de datos"}
@@ -40,3 +40,43 @@ def obtener_libros_con_categoria():
         
         resultado.append(libro_completo)
     return resultado
+
+
+def obtener_libros_db():
+    conexion = obtener_conexion()
+    cursor = conexion.cursor()
+
+    cursor.execute("SELECT id, nombre, categoria_id, stock FROM libros")
+
+    filas = cursor.fetchall()
+
+    conexion.close()
+
+    libros = []
+    for fila in filas:
+        libros.append({
+            "id": fila[0],
+            "nombre": fila[1],
+            "categoria_id": fila[2],
+            "stock": fila[3]
+        })
+    return libros
+
+def guardar_libro_db(libro: dict):
+    conexion = obtener_conexion()
+    cursor = conexion.cursor()
+
+    cursor.execute("""
+        INSERT INTO libros (nombre,categoria_id,stock)
+        VALUES (?,?, ?)
+        """,
+        (libro.get("nombre"), libro.get("categoria_id"), libro.get("stock"))
+)
+    
+    conexion.commit()
+    libro_id = cursor.lastrowid
+    conexion.close()
+
+    libro["id"] = libro_id
+
+    return libro

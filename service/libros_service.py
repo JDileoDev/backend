@@ -3,7 +3,7 @@ import repositories.libros_repository as repository
 
 
 def obtener_libros(limite , offset ,orden =None):
-    lista_libros = repository.obtener_libros_r()
+    lista_libros = repository.obtener_libros_db()
     if not lista_libros:
         return None
     lista_libros = lista_libros[offset: offset + limite] 
@@ -18,7 +18,7 @@ def obtener_libros(limite , offset ,orden =None):
             reverse=reverse)
     return lista_libros
 def cargar_libro(libro : dict):
-    nuevo_libro = repository.cargar_libro_r(libro)
+    nuevo_libro = repository.guardar_libro_db(libro)
     if not libro:
         return None
     return nuevo_libro
@@ -52,7 +52,7 @@ def borrar_libro(id):
     return libro_eliminado
 
 def filtrado_por_categoria(cat : str, lista_libros):
-    return [l for l in lista_libros if l.get("categoria" , "").lower() == cat.lower()]
+    return repository.obtener_libros_con_categoria()
 
 
 def filtrar_por_stock(opcion: bool , lista_libros):

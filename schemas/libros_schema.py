@@ -4,12 +4,12 @@ from typing import List , Optional
 class LibroSalida(BaseModel):
     id : int    
     nombre : str
-    categoria : str
+    categoria_id : int
     stock : int
 
 class LibroCargar(BaseModel):
     nombre : str
-    categoria : str
+    categoria_id : int
     stock : Optional[int] = None
 
 class LibroResponse(LibroCargar):
