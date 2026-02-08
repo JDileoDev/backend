@@ -34,11 +34,11 @@ Actualmente, el proyecto se encuentra en una etapa de transición:
    ```bash
    git clone [https://github.com/JDileoDev/backend.git](https://github.com/JDileoDev/backend.git)
 Instalar dependencias:
+ip install fastapi uvicorn
 
-pip install fastapi uvicorn
 Iniciar el servidor:
-
 uvicorn main:app --reload
+
 🚩 Próximos Desafíos
 [ ] Migrar los métodos PUT y DELETE a persistencia SQL.
 
