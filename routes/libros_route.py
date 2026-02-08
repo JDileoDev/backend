@@ -1,21 +1,28 @@
 
-from fastapi import HTTPException , status , APIRouter
-from typing import List , Optional
+from fastapi import Query ,HTTPException , status , APIRouter , Depends
+from typing import List , Optional 
 import service.libros_service as service 
 import schemas.libros_schema as schema
 router = APIRouter()
 
 
-@router.get("/libros" , response_model=List[schema.MostrarResponse])
-def mostrar_libros(categoria:Optional[str] = None , stock: Optional[bool]= None):
-    libros = service.obtener_libros()
-    if categoria:
-        libros = service.filtrado_por_categoria(categoria , libros)
+@router.get("/libros" , response_model=List[schema.LibroSalida])
+def mostrar_libros(
+        filtros : schema.LibroFiltro = Depends(),
+        limite : int =  Query(10, ge=1),
+        offset : int = Query(0, ge=0), 
+        orden : str | None = None    ):
     
-    if stock is True or stock is False:
-        libros = service.filtrar_por_stock(stock , libros)
 
-    if not service.obtener_libros():
+    libros = service.obtener_libros(limite, offset,orden)
+    
+    if filtros.categoria:
+        libros = service.filtrado_por_categoria(filtros.categoria , libros)
+    
+    if filtros.stock is True or filtros.stock is False:
+        libros = service.filtrar_por_stock(filtros.stock , libros)
+
+    if not service.obtener_libros(limite, offset,orden):
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
     return libros
 
