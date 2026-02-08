@@ -35,12 +35,8 @@ Actualmente, el proyecto se encuentra en una etapa de transición:
    git clone [https://github.com/JDileoDev/backend.git](https://github.com/JDileoDev/backend.git)
 Instalar dependencias:
 
-Bash
-
 pip install fastapi uvicorn
 Iniciar el servidor:
-
-Bash
 
 uvicorn main:app --reload
 🚩 Próximos Desafíos
