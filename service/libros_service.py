@@ -2,12 +2,29 @@
 import repositories.libros_repository as repository
 
 
+<<<<<<< HEAD
 def obtener_libros(limite , offset):
     lista_libros = repository.obtener_libros_r()
     if not lista_libros:
         return None
     return lista_libros[offset: offset + limite] 
+=======
+def obtener_libros(limite , offset ,orden =None):
+    lista_libros = repository.obtener_libros_r()
+    if not lista_libros:
+        return None
+    lista_libros = lista_libros[offset: offset + limite] 
+>>>>>>> desarrollo
 
+    if orden:
+        reverse = False
+        if orden.startswith("-"):
+            reverse = True
+            orden = orden[1:]
+        lista_libros = sorted(
+            lista_libros, key=lambda x: x.get(orden),
+            reverse=reverse)
+    return lista_libros
 def cargar_libro(libro : dict):
     nuevo_libro = repository.cargar_libro_r(libro)
     if not libro:
